@@ -1,0 +1,22 @@
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string str)
+{
+    //Write your code here
+    int n=str.length();
+    int arr[26]={0}, ans=0, cnt=0;
+    for(int i=0; i<n; i++)
+    {
+        if(arr[int(str[i])-97]==0)
+        {
+            arr[int(str[i])-97] = i;
+            cnt++;
+        }
+        else
+        {
+            cnt = min(i-arr[int(str[i])-97], cnt+1);
+            arr[int(str[i])-97] = i;
+        }
+        ans = max(ans, cnt);
+    }
+    return ans;
+}
