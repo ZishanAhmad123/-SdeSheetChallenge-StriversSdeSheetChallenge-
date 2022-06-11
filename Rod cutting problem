@@ -1,0 +1,21 @@
+ int f(int ind, int N,vector<int>& profit, vector<vector<int>>&dp ){
+        if(ind==0){          // 1 lenght of rod remain
+            return N* profit[0];        // i need N from 1 lenght rod so infinite supply (1+1+1+...1) N time to obtain N and * by Profit
+        }
+        if(dp[ind][N]!=-1)return dp[ind][N];
+        int nottake=f(ind-1, N, profit,dp);
+        int take=-1e9;
+        int rodlenght=ind+1;
+        if(rodlenght<=N){
+     take=profit[ind] + f(ind, N-rodlenght, profit,dp); // Infinite  supply same ind pr rhna hai take part me
+           }
+        return  dp[ind][N]= max(take, nottake);
+    }
+    
+
+int cutRod(vector<int> &price, int n)
+{
+	// Write your code here.
+    vector<vector<int>>dp(n, vector<int>(n+1, -1));
+     return   f(n-1, n, price,dp);
+}
