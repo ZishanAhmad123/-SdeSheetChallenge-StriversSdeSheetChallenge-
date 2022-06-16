@@ -1,0 +1,38 @@
+bool canPoss(vector<int> &arr,int c,int dis,int n)
+{
+int cordi=arr[0]; int cow=1;
+
+   for(int i=1;i<n;i++){
+
+       if(arr[i]-cordi>=dis) {
+
+           cow++;cordi=arr[i];
+
+   }
+
+} if(cow>=c) return true;
+
+   return false;
+
+}
+
+int chessTournament(vector<int> &positions , int n ,  int c){
+
+sort(positions.begin(),positions.end());
+
+   int low=1;
+
+   int high=positions[n-1]-positions[0];
+
+   int res=1;
+
+   while(low<=high){
+       int mid=(low+high)>>1;
+
+       if(canPoss(positions,c,mid,n)) {
+    res=max(res,mid);
+low=mid+1;}
+       else high=mid-1;
+   }
+   return res;
+}
