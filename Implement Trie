@@ -1,0 +1,152 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+ 
+
+class Node{
+
+ 
+
+public:
+
+ 
+
+char data;
+
+vector<Node*>v;
+
+   bool end;
+
+ 
+
+Node(char data){
+
+ 
+
+ this -> data = data;
+
+       v.resize(26);
+
+    end = false;
+
+   }
+
+};
+
+ 
+
+class Trie {
+
+   
+
+   Node *root;
+
+   
+
+public:
+
+   
+
+   Trie() {
+
+       
+
+       root = new Node('\0');
+
+   }
+
+   
+
+   void insert(string word) {
+
+       
+
+       Node *temp = root;
+
+       
+
+       for(char &c : word){
+
+           if(temp->v[c - 'a']){
+
+               temp = temp->v[c - 'a'];
+
+           }
+
+           else{
+
+               temp = temp->v[c - 'a'] = new Node(c);
+
+           }
+
+       }
+
+       
+
+       temp->end = true;
+
+   }
+
+   
+
+   bool search(string word) {
+
+       
+
+       Node *temp = root;
+
+       
+
+       for(char &c : word){
+
+           if(temp->v[c - 'a']){
+
+               temp = temp->v[c - 'a'];
+
+           }
+
+           else{
+
+               return false;
+
+           }
+
+       }
+
+       
+
+       return temp->end;
+
+   }
+
+   
+
+   bool startsWith(string prefix) {
+
+       
+
+       Node *temp = root;
+
+       
+
+       for(char &c : prefix){
+
+           if(temp->v[c - 'a']){
+
+               temp = temp->v[c - 'a'];
+
+           }
+
+           else{
+
+               return false;
+
+           }
+
+       }
+       return true;
+
+   }
+
+};
