@@ -1,0 +1,17 @@
+void postOrder(TreeNode *Node,vector<int> &pot){
+        if(Node==NULL)
+            return;
+    
+        postOrder(Node->left,pot);
+        postOrder(Node->right,pot);
+        pot.push_back(Node->data);
+     
+}
+
+vector<int> getPostOrderTraversal(TreeNode *root)
+{
+    vector<int> pot;
+    postOrder(root,pot);
+    
+    return pot;
+}
