@@ -1,0 +1,40 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+
+#include<bits/stdc++.h>
+int height(TreeNode<int> *root)
+{
+    if(!root) return 0;
+    int lh=height(root->left);
+    int rh=height(root -> right);
+    return max(lh,rh)+1;
+}
+int diameterOfBinaryTree(TreeNode<int> *root)
+{
+    if(!root) return 0;
+    int left=height(root->left);
+    int right=height(root->right);
+    
+    int curr=left+right;
+    int leftdia=diameterOfBinaryTree(root->left);
+    int rightdia=diameterOfBinaryTree(root->right);
+    return max(curr,max(leftdia,rightdia));
+    // Write Your Code Here.
+}
